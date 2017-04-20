@@ -1,0 +1,36 @@
+buildscript {
+	apply from: 'dependencies.gradle'
+	
+	repositories {
+		jcenter()
+	}
+	
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${libs.springBootVersion}"
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply from: rootProject.file('dependencies.gradle')
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile 'org.hibernate:hibernate-validator'
+	//compile 'org.liquibase:liquibase-core'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-logging'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	
+	runtime "com.h2database:h2:${libs.h2Version}"
+	
+	testCompile "junit:junit:${libs.junitVersion}"
+	testCompile "org.assertj:assertj-core:${libs.assertJCoreVersion}"
+	testCompile "org.mockito:mockito-core:${libs.mockitoCoreVersion}"
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test.testLogging.exceptionFormat = 'full'
